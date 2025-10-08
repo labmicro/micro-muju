@@ -25,7 +25,8 @@
 
 ##################################################################################################
 # Toolchain settings
-TOOLCHAIN_PREFIX ?= riscv64-unknown-elf-
+TOOLCHAIN_LOCATION ?= ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/14.2.0-3.1/.content/bin/
+TOOLCHAIN_PREFIX ?= riscv-none-elf-
 
 ##################################################################################################
 # Toolchain commands
@@ -51,10 +52,10 @@ OD = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)objdump
 # Preprocesor definitions
 
 # Compiler flags
-CFLAGS += -mabi=ilp32
+CFLAGS += -mabi=ilp32 -g3
 
 # Assembler flags
-AFLAGS += -mabi=ilp32  -x assembler-with-cpp
+AFLAGS += -mabi=ilp32  -x assembler-with-cpp -g
 
 # Linker flags
 LFLAGS += -mabi=ilp32 -Wl,--Map="$(TARGET_NAME).map",--gc-sections,--cref,--no-relax,--no-warn-rwx-segments
@@ -67,6 +68,6 @@ LD_EXTENSION = elf
 GDB_FLAGS = $(TARGET_ELF) -ex "target remote-extended localhost:3333"
 
 # Debug server
-GDB_SERVER = openocd
+GDB_SERVER = ~/.local/xPacks/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/openocd
 
-FLASH_WRITER = openocd
+FLASH_WRITER = ~/.local/xPacks/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/openocd
