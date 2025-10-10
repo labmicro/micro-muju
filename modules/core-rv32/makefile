@@ -25,8 +25,18 @@
 
 ##################################################################################################
 # Toolchain settings
-TOOLCHAIN_LOCATION ?= ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/14.2.0-3.1/.content/bin/
+
+OPENOCD_LOCATION ?= ~/.local/xPacks/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/
+ifeq ("$(wildcard $(OPENOCD_LOCATION)openocd)","")
+    OPENOCD_LOCATION :=
+endif
+
 TOOLCHAIN_PREFIX ?= riscv-none-elf-
+TOOLCHAIN_LOCATION ?= ~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/14.2.0-3.1/.content/bin/
+ifeq ("$(wildcard $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc)","")
+    TOOLCHAIN_PREFIX := riscv64-unknown-elf-
+    TOOLCHAIN_LOCATION :=
+endif
 
 ##################################################################################################
 # Toolchain commands
@@ -68,6 +78,6 @@ LD_EXTENSION = elf
 GDB_FLAGS = $(TARGET_ELF) -ex "target remote-extended localhost:3333"
 
 # Debug server
-GDB_SERVER = ~/.local/xPacks/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/openocd
+GDB_SERVER = $(OPENOCD_LOCATION)openocd
 
-FLASH_WRITER = ~/.local/xPacks/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/openocd
+FLASH_WRITER = $(OPENOCD_LOCATION)openocd

@@ -242,9 +242,11 @@ info:
 	@echo Fuentes: $(PROJECT_SRC)
 	@echo Cabeceras: $(PROJECT_INC)
 	@echo -------------------------------------------------------------------------------
-	@echo Flags Compulador: $(CFLAGS)
+	@echo Compilador: $(CC)
+	@echo Flags Compilador: $(CFLAGS)
 	@echo Flags Ensamblador: $(AFLAGS)
 	@echo Flags Enlazador: $(LFLAGS)
+	@echo Debug Server: $(GDB_SERVER)
 	@echo -------------------------------------------------------------------------------
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
