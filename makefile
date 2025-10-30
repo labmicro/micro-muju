@@ -85,10 +85,10 @@ DIVISION_LINE = ================================================================
 
 ##################################################################################################
 # Variable to show or hide command lines when rules are executed
-ifeq ($(call uc,$(VERBOSE)),Y)
-    QUIET =
-else
+ifeq ($(findstring Y,$(call uc,$(VERBOSE))),)
     QUIET = @
+else
+    QUIET =
 endif
 
 ##################################################################################################
@@ -182,8 +182,13 @@ DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS)
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
 TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 
-PROJECT_SRC := $(PROYECTO) $(PROYECTO)/src $(foreach path,$(MODULES),modules/$(path)/src)
-PROJECT_INC := $(PROYECTO) $(PROYECTO)/inc $(foreach path,$(MODULES),modules/$(path)/inc)
+PROJECT_SRC := $(PROYECTO) $(PROYECTO)/src
+PROJECT_INC := $(PROYECTO) $(PROYECTO)/inc
+
+ifeq ($(findstring Y,$(call uc,$(STRIP))),)
+    PROJECT_SRC += $(foreach path,$(MODULES),modules/$(path)/src)
+    PROJECT_INC += $(foreach path,$(MODULES),modules/$(path)/inc)
+endif
 
 ##################################################################################################
 #
@@ -251,3 +256,4 @@ info:
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
 	@echo Definciones: $(DEFINES)
+	@echo Debug: $(findstring Y,$(call uc,$(VERBOSE))) : $(QUIET)
