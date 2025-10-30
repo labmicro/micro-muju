@@ -212,6 +212,7 @@ $(TARGET_ELF): $(PROJECT_LIB) $(PROJECT_OBJ)
 .DEFAULT_GOAL := all
 
 all: $(TARGET_ELF) $(POST_BUILD_TARGET)
+	@sed "s|##PROYECTO_PATH##|$(PROYECTO)|g" .vscode/c_cpp_properties.json.template > .vscode/c_cpp_properties.json
 
 ##################################################################################################
 #

@@ -1,0 +1,61 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "./modules/core-rv32/inc",
+                "./modules/nuclei-n200/inc",
+                "./modules/gd32vf103/device/inc",
+                "./modules/gd32vf103/drivers/inc"
+            ],
+            "defines": [
+                "HXTAL_VALUE=8000000U",
+                "USE_DRIVERS",
+                "BOARD=edu-unt-rv",
+                "MCU=gd32vf103cbt6",
+                "SOC=gd32vf103",
+                "CPU=nuclei-n200",
+                "ARCH=rv32",
+                "RTOS=BAREMETAL",
+                "EDU_UNT_RV",
+                "GD32VF103",
+                "GD32VF103CBT6",
+                "NUCLEI_N200",
+                "RV32",
+                "BAREMETAL"
+            ],
+            "cStandard": "c99",
+            "intelliSenseMode": "${default}",
+            "compilerPath": "riscv64-unknown-elf-gcc"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "./modules/core-rv32/inc",
+                "./modules/nuclei-n200/inc",
+                "./modules/gd32vf103/device/inc",
+                "./modules/gd32vf103/drivers/inc"
+            ],
+            "defines": [
+                "HXTAL_VALUE=8000000U",
+                "USE_DRIVERS",
+                "BOARD=edu-unt-rv",
+                "MCU=gd32vf103cbt6",
+                "SOC=gd32vf103",
+                "CPU=nuclei-n200",
+                "ARCH=rv32",
+                "RTOS=BAREMETAL",
+                "EDU_UNT_RV",
+                "GD32VF103",
+                "GD32VF103CBT6",
+                "NUCLEI_N200",
+                "RV32",
+                "BAREMETAL"
+            ],
+            "cStandard": "c99",
+            "intelliSenseMode": "${default}",
+            "compilerPath": "~/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/14.2.0-3.1/.content/bin/riscv-none-elf-gcc"
+        }
+    ],
+    "version": 4
+}
