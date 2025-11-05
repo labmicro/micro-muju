@@ -25,6 +25,14 @@ uint32_t mtime_hi(void);
 
 uint64_t get_mtime_value();
 
+uint32_t mtimecmp_lo(void);
+
+uint32_t mtimecmp_hi(void);
+
+uint64_t get_compare_value();
+
+void set_compare_value(uint64_t value);
+
 uint64_t get_instret_value();
 
 uint64_t get_cycle_value();

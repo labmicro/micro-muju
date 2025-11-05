@@ -185,7 +185,7 @@ TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 PROJECT_SRC := $(PROYECTO) $(PROYECTO)/src
 PROJECT_INC := $(PROYECTO) $(PROYECTO)/inc
 
-ifeq ($(findstring Y,$(call uc,$(STRIP))),)
+ifeq ($(findstring Y,$(call uc,$(NAKED))),)
     PROJECT_SRC += $(foreach path,$(MODULES),modules/$(path)/src)
     PROJECT_INC += $(foreach path,$(MODULES),modules/$(path)/inc)
 endif
@@ -211,8 +211,10 @@ $(TARGET_ELF): $(PROJECT_LIB) $(PROJECT_OBJ)
 
 .DEFAULT_GOAL := all
 
-all: $(TARGET_ELF) $(POST_BUILD_TARGET)
+vscode:
 	@sed "s|##PROYECTO_PATH##|$(PROYECTO)|g" .vscode/c_cpp_properties.json.template > .vscode/c_cpp_properties.json
+
+all: vscode $(TARGET_ELF) $(POST_BUILD_TARGET)
 
 ##################################################################################################
 #

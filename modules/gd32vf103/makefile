@@ -70,8 +70,8 @@ DAP ?= cmsis-dap
 
 # Command flags for gdb server
 GDB_SERVER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f modules/gd32vf103/gd32vf103.cfg
+GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f modules/gd32vf103/gd32vf103.cfg -c "adapter speed 8500"
 
 # Command flags for download target
 FLASH_WRITER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f modules/gd32vf103/gd32vf103.cfg
+FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f modules/gd32vf103/gd32vf103.cfg -c "adapter speed 8500"

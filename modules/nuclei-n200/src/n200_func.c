@@ -45,6 +45,30 @@ uint64_t get_timer_value() {
     }
 }
 
+uint32_t mtimecmp_lo(void) {
+    return *(volatile uint32_t *)(TIMER_CTRL_ADDR + TIMER_MTIMECMP);
+}
+
+uint32_t mtimecmp_hi(void) {
+    return *(volatile uint32_t *)(TIMER_CTRL_ADDR + TIMER_MTIMECMP + 4);
+}
+
+uint64_t get_compare_value() {
+    while (1) {
+        uint32_t hi = mtimecmp_hi();
+        uint32_t lo = mtimecmp_lo();
+        if (hi == mtimecmp_hi())
+            return ((uint64_t)hi << 32) | lo;
+    }
+}
+
+void set_compare_value(uint64_t value) {
+    volatile void * addr = (uint8_t *)(TIMER_CTRL_ADDR + TIMER_MTIMECMP);
+    asm volatile("sw %0, 0(%1)" : : "r"(-1U), "r"(addr)); // prevent load > timecmp
+    asm volatile("sw %0, 0(%1)" : : "r"((uint32_t)(value >> 32)), "r"(addr + 4));
+    asm volatile("sw %0, 0(%1)" : : "r"((uint32_t)(value)), "r"(addr));
+}
+
 uint32_t get_timer_freq() {
     return TIMER_FREQ;
 }

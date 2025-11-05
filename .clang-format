@@ -14,3 +14,4 @@ AccessModifierOffset: -4
 FixNamespaceComments: false
 PointerAlignment: Middle
 AlignConsecutiveMacros: AcrossEmptyLines
+AllowShortLoopsOnASingleLine: true
