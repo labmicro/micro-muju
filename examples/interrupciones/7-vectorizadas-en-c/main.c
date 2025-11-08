@@ -96,7 +96,7 @@ __attribute__((interrupt("machine"), aligned(64))) void trap_entry(void) {
 
 void eclic_mtip_handler(void) {
     timer_update(timer_compare() + ms_to_ticks(500));
-    cambiar_led(LED_VERDE);
+    cambiar_salida(LED_VERDE);
 }
 
 /* === Public function implementation ========================================================== */
@@ -107,6 +107,7 @@ int main(void) {
 
     eclic_mode_enable();
     eclic_irq_enable(CLIC_INT_TMR, 1, 1);
+    // eclic_set_intattr(CLIC_INT_TMR, 0x01);
     eclic_global_interrupt_enable();
 
     timer_update(get_timer_value() + ms_to_ticks(500));
