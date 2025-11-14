@@ -29,11 +29,11 @@ SPDX-License-Identifier: MIT
 
 /* === Macros definitions ====================================================================== */
 
-#define LED_ROJO 1        /**< Numero de terminal que controla el led verde */
-#define LED_VERDE 3       /**< Numero de terminal que controla el led rojo */
-#define LED_AZUL 2        /**< Numero de terminal que controla el led azul */
+#define LED_ROJO       1  /**< Numero de terminal que controla el led verde */
+#define LED_VERDE      3  /**< Numero de terminal que controla el led rojo */
+#define LED_AZUL       2  /**< Numero de terminal que controla el led azul */
 #define TECLA_CANCELAR 10 /**< Numero de terminal de la tecla cancelar */
-#define TECLA_ACEPTAR 11  /**< Numero de terminal de la tecla aceptar */
+#define TECLA_ACEPTAR  11 /**< Numero de terminal de la tecla aceptar */
 
 /* === Private data type declarations ========================================================== */
 
@@ -66,10 +66,10 @@ int main(void) {
     SystemCoreClockUpdate();
 
     rcu_periph_clock_enable(RCU_GPIOA);
-    rcu_periph_clock_enable(RCU_GPIOB);
-    rcu_periph_clock_enable(RCU_AF);
     gpio_init(GPIOA, GPIO_MODE_OUT_PP, GPIO_OSPEED_2MHZ,
               BIT(LED_ROJO) | BIT(LED_VERDE) | BIT(LED_AZUL));
+
+    rcu_periph_clock_enable(RCU_GPIOB);
     gpio_init(GPIOB, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_2MHZ,
               BIT(TECLA_ACEPTAR) | BIT(TECLA_CANCELAR));
 
@@ -77,6 +77,7 @@ int main(void) {
     eclic_set_nlbits(0);
     eclic_global_interrupt_enable();
 
+    rcu_periph_clock_enable(RCU_AF);
     gpio_exti_source_select(GPIO_PORT_SOURCE_GPIOB, GPIO_PIN_SOURCE_10);
     gpio_exti_source_select(GPIO_PORT_SOURCE_GPIOB, GPIO_PIN_SOURCE_11);
 
